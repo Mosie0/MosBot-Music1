@@ -5,7 +5,7 @@
         "node": "~10.6.0"
     },
     "scripts": {
-        "start": "node MusicBot.js"
+        "start": "nodemon MusicBot.js"
 
     },
     "dependencies": {
