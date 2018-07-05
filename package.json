@@ -13,6 +13,7 @@
         "ms": "^2.1.1",
         "ffmpeg-binaries": "^3.2.2-3",
         "ytdl-core": "^0.20.4",
-        "simple-youtube-api": "^5.0.2"
+        "simple-youtube-api": "^5.0.2",
+        "opusscript": "^0.0.6"
     }
 }
