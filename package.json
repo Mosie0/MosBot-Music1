@@ -1,0 +1,19 @@
+{
+    "name": "Musicbot",
+
+    "engines": {
+        "node": ">=0.10.3 <0.12"
+    },
+    "scripts": {
+        "start": "nodemon MusicBot.js"
+
+    },
+    "dependencies": {
+        "discord.js": "file:node_modules/discord.js",
+        "nodemon": "^1.17.5",
+        "ms": "^2.1.1",
+        "ffmpeg-binaries": "^3.2.2-3",
+        "ytdl-core": "^0.20.4",
+        "simple-youtube-api": "^5.0.2"
+    }
+}
