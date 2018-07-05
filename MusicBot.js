@@ -14,7 +14,7 @@ client.on('warn', console.warn);
 
 client.on('error', console.error);
 
-client.on("ready", async   => {
+client.on("ready", async ()  => {
 	console.log(`${client.user.username} is online on ${client.guilds.size} servers!`);
 	client.user.setGame(`Being ` + `${client.user.username} ` + `Serving: ${client.guilds.size} Servers`, "https://www.twitch.tv/superchiefyt");
 });
@@ -23,7 +23,7 @@ client.on('disconnect', () => console.log('I just disconnected, making sure you 
 
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
 
-client.on('message',  msg => { // eslint-disable-line
+client.on('message', async msg => { // eslint-disable-line
 		if (msg.author.bot) return undefined;
 		if (!msg.content.startsWith(PREFIX)) return undefined;
 
