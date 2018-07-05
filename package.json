@@ -2,7 +2,7 @@
     "name": "Musicbot",
 
     "engines": {
-        "node": "^6.1.0"
+        "node": "~6.1.0"
     },
     "scripts": {
         "start": "nodemon MusicBot.js"
