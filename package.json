@@ -2,7 +2,7 @@
     "name": "Musicbot",
 
     "engines": {
-        "node": "~6.1.0"
+        "node": "~10.6.0"
     },
     "scripts": {
         "start": "node MusicBot.js"
