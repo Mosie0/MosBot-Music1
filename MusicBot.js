@@ -5,6 +5,7 @@ const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 
 
+
 const client = new Client({ disableEveryone: true });
 
 const youtube = new YouTube(GOOGLE_API_KEY);
@@ -56,7 +57,11 @@ client.on('message', async msg => { // eslint-disable-line
 				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
 				await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
 			}
-			return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
+			const Discord = require('discord.js');
+			const addedtoembed = new Discord.RichEmbed()
+			.setColor(`#FF000`)
+				.setDescription(`✅ Playlist: **${playlist.title}** has been added to the queue!`)
+			return msg.channel.send(addedtoembed);
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -224,8 +229,9 @@ function play(guild, song) {
 const Discord = require('discord.js');
 let startembed = new Discord.RichEmbed()
 .setColor('#FF000')
-.setDescription(`🎶 Start playing: **${song.title}**`)
+.setDescription(`🎶 Start playing: **${song.title}** \n [Song Link](${song.url})`)
 	serverQueue.textChannel.send(startembed);
 }
+
 
 client.login(process.env.BOT_TOKEN);
