@@ -14,7 +14,7 @@ client.on('warn', console.warn);
 
 client.on('error', console.error);
 
-client.on("ready", async () => {
+client.on("ready", async   => {
 	console.log(`${client.user.username} is online on ${client.guilds.size} servers!`);
 	client.user.setGame(`Being ` + `${client.user.username} ` + `Serving: ${client.guilds.size} Servers`, "https://www.twitch.tv/superchiefyt");
 });
