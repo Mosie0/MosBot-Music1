@@ -54,6 +54,7 @@ client.on('message', async msg => { // eslint-disable-line
 		const Discord = require('discord.js')
 		const moment = require('moment');
 require("moment-duration-format");
+		const version = require('discord.js')
    const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
     let channelsize = client.channels.size;
     let guildsize = client.guilds.size;
