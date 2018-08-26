@@ -3,7 +3,7 @@ const { PREFIX } = require('./config');
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-const moment = require('moment'),
+const moment = require('moment');
 require("moment-duration-format");
 
 
