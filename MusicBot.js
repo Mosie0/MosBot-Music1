@@ -97,6 +97,7 @@ msg.channel.send(embed);
 			.setColor(`#FF000`)
 				.setDescription(`✅ Playlist: **${playlist.title}** has been added to the queue!`)
 			return msg.channel.send(addedtoembed).then(msg => {msg.delete(10000).catch()})
+			msg.delete(15000).catch()
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -134,6 +135,7 @@ msg.channel.send(embed);
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!').then(msg => {msg.delete(10000).catch()})
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.').then(msg => {msg.delete(10000).catch()})
 		serverQueue.connection.dispatcher.end(video);
+		msg.delete(15000).catch()
 		return undefined;
 
 
@@ -149,6 +151,7 @@ msg.channel.send(embed);
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.').then(msg => {msg.delete(10000).catch()})
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
+		msg.delete(15000).catch()
 		return undefined;
 
 
@@ -162,6 +165,7 @@ msg.channel.send(embed);
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 		return msg.channel.send(`I set the volume to: **${args[1]}**`).then(msg => {msg.delete(10000).catch()})
+		msg.delete(15000).catch()
 
 
 
@@ -169,6 +173,7 @@ msg.channel.send(embed);
 		const Discord = require('discord.js');
 		if (!serverQueue) return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
 		return msg.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`).then(msg => {msg.delete(10000).catch()})
+		msg.delete(15000).catch()
 
 
 
@@ -182,12 +187,14 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 
 **Now playing:** ${serverQueue.songs[0].title}
 		`).then(msg => {msg.delete(10000).catch()})
+		msg.delete(15000).catch()
 	} else if (command === 'pause') {
 		const Discord = require('discord.js');
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('⏸ Paused the music for you!').then(msg => {msg.delete(10000).catch()})
+			msg.delete(15000).catch()
 		}
 		return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
 	} else if (command === 'resume') {
@@ -198,6 +205,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 			return msg.channel.send('▶ Resumed the music for you!').then(msg => {msg.delete(10000).catch()})
 		}
 		return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
+		msg.delete(15000).catch()
 	}
 
 	return undefined;
@@ -266,6 +274,7 @@ let startembed = new Discord.RichEmbed()
 .setColor('#FF000')
 .setDescription(`🎶 Start playing: **${song.title}** \n [Song Link](${song.url})`)
 	serverQueue.textChannel.send(startembed).then(msg => {msg.delete(10000).catch()})
+	msg.delete(15000).catch()
 }
 
 
