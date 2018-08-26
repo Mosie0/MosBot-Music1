@@ -54,7 +54,7 @@ client.on('message', async msg => { // eslint-disable-line
 		const Discord = require('discord.js')
 		const moment = require('moment');
 require("moment-duration-format");
-		const version = require('discord.js')
+		const { version } = require('discord.js')
    const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
     let channelsize = client.channels.size;
     let guildsize = client.guilds.size;
@@ -63,7 +63,7 @@ const embed = new Discord.RichEmbed()
 .setColor(`#FF000`)
 .setThumbnail(client.user.avatarURL)
 .addField(`Memory Usage`, `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`, true)
-.addField(`Ping`, client.ping + "ms", true)
+.addField(`Ping`, `${bot.pings[0]}ms`, true)
 .addField(`Bot Version`, `2.0.0`, true)
 .addField(`Uptime`, `${duration}`, true)
 .addField(`Users`, `${usersize}`, true)
