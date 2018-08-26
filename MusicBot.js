@@ -19,7 +19,7 @@ client.on('error', console.error);
 
 client.on("ready", async () => {
 	console.log(`${client.user.username} is online on ${client.guilds.size} servers!`);
-	client.user.setGame(`${client.user.username} ` + `Serving: ${client.guilds.size} Servers`, "https://www.twitch.tv/superchiefyt");
+ 	client.user.setPresence({game: { name: `Music`, type: "LISTENING", url: ""}})
 });
 
 client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
