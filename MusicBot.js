@@ -1,8 +1,10 @@
-const { Client, Util } = require('discord.js');
+const { Client, Util, Discord, version } = require('discord.js');
 const { PREFIX } = require('./config');
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
+const moment = require('moment'),
+require("moment-duration-format");
 
 
 
@@ -37,8 +39,40 @@ client.on('message', async msg => { // eslint-disable-line
 
 	let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(PREFIX.length);
-
-	if (command === 'play') {
+	if(command === "ping") {
+    const useruser = "Command Ran By: " + msg.author.username;
+    const userurl = msg.author.avatarURL;
+    let botembed = new Discord.RichEmbed()
+        .setColor("#000FF")
+        .setDescription(`<a:Dots:426956230582599690> Loading......`)
+        .setTimestamp()
+    msg.channel.send(botembed).then(msg =>{
+        botembed.setColor("#000FF")
+        botembed.setDescription(`:ping_pong: Pong! **\`${bot.pings[0]}ms\`**`)
+        botembed.setFooter(useruser, userurl)
+        botembed.setTimestamp()
+        msg.edit(botembed)
+    })
+	}else if(command === "Stats") {
+   const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+    let channelsize = client.channels.size;
+    let guildsize = client.guilds.size;
+    let usersize = client.users.size;
+const embed = new Discord.RichEmbed()
+.setColor(`#FF000`)
+.setThumbnail(client.user.avatarURL)
+.addField(`Memory Usage`, `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`, true)
+.addField(`Ping`, client.ping + "ms", true)
+.addField(`Bot Version`, `2.0.0`, true)
+.addField(`Uptime`, `${duration}`, true)
+.addField(`Users`, `${usersize}`, true)
+.addField(`Servers`, `${guildsize}`, true)
+.addField(`Channels`, `${channelsize}`, true)
+.addField(`Discord.js Version`, `v${version}`, true)
+.addField(`Node Version`, `${process.version}`, true)
+msg.channel.send(embed);
+	}else
+		if (command === 'play') {
 		const Discord = require('discord.js');
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
