@@ -96,7 +96,7 @@ msg.channel.send(embed);
 			const addedtoembed = new Discord.RichEmbed()
 			.setColor(`#FF000`)
 				.setDescription(`✅ Playlist: **${playlist.title}** has been added to the queue!`)
-			return msg.channel.send(addedtoembed);
+			return msg.channel.send(addedtoembed).then(msg => {msg.delete(10000).catch()})
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -108,7 +108,7 @@ msg.channel.send(embed);
 					const Songselectembed = new Discord.RichEmbed()
 						.setColor('#FF000')
 						.setDescription(`__**Song selection:**__\n\n ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}\n\nPlease provide a value to select one of the search results ranging from 1-10.`)
-					msg.channel.send(Songselectembed);
+					msg.channel.send(Songselectembed).then(msg => {msg.delete(10000).catch()})
 					// eslint-disable-next-line max-depth
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
@@ -118,21 +118,21 @@ msg.channel.send(embed);
 						});
 					} catch (err) {
 						console.error(err);
-						return msg.channel.send('No or invalid value entered, cancelling video selection.');
+						return msg.channel.send('No or invalid value entered, cancelling video selection.').then(msg => {msg.delete(10000).catch()})
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send('🆘 I could not obtain any search results.');
+					return msg.channel.send('🆘 I could not obtain any search results.').then(msg => {msg.delete(10000).catch()})
 				}
 			}
 			return handleVideo(video, msg, voiceChannel);
 		}
 	} else if (command === 'skip') {
 		const Discord = require('discord.js');
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');
+		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!').then(msg => {msg.delete(10000).catch()})
+		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.').then(msg => {msg.delete(10000).catch()})
 		serverQueue.connection.dispatcher.end(video);
 		return undefined;
 
@@ -144,9 +144,9 @@ msg.channel.send(embed);
 			.setColor("#FF0000")
 			.setDescription(`❌ Leaving Voice Chat, No More Songs :frowning:`)
 			.setFooter("Command Ran By: " + msg.author.username, msg.author.avatarURL)
-		msg.channel.send(leaveembed);
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.');
+		msg.channel.send(leaveembed).then(msg => {msg.delete(10000).catch()})
+		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!').then(msg => {msg.delete(10000).catch()})
+		if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.').then(msg => {msg.delete(10000).catch()})
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
 		return undefined;
@@ -156,48 +156,48 @@ msg.channel.send(embed);
 
 	} else if (command === 'volume') {
 		const Discord = require('discord.js');
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing.');
-		if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}**`);
+		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!').then(msg => {msg.delete(10000).catch()})
+		if (!serverQueue) return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
+		if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}**`).then(msg => {msg.delete(10000).catch()})
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
-		return msg.channel.send(`I set the volume to: **${args[1]}**`);
+		return msg.channel.send(`I set the volume to: **${args[1]}**`).then(msg => {msg.delete(10000).catch()})
 
 
 
 	} else if (command === 'np') {
 		const Discord = require('discord.js');
-		if (!serverQueue) return msg.channel.send('There is nothing playing.');
-		return msg.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`);
+		if (!serverQueue) return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
+		return msg.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`).then(msg => {msg.delete(10000).catch()})
 
 
 
 	} else if (command === 'queue') {
 		const Discord = require('discord.js');
-		if (!serverQueue) return msg.channel.send('There is nothing playing.');
+		if (!serverQueue) return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
 		return msg.channel.send(`
 __**Song queue:**__
 
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 
 **Now playing:** ${serverQueue.songs[0].title}
-		`);
+		`).then(msg => {msg.delete(10000).catch()})
 	} else if (command === 'pause') {
 		const Discord = require('discord.js');
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('⏸ Paused the music for you!');
+			return msg.channel.send('⏸ Paused the music for you!').then(msg => {msg.delete(10000).catch()})
 		}
-		return msg.channel.send('There is nothing playing.');
+		return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
 	} else if (command === 'resume') {
 		const Discord = require('discord.js');
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('▶ Resumed the music for you!');
+			return msg.channel.send('▶ Resumed the music for you!').then(msg => {msg.delete(10000).catch()})
 		}
-		return msg.channel.send('There is nothing playing.');
+		return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
 	}
 
 	return undefined;
@@ -230,7 +230,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		} catch (error) {
 			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
-			return msg.channel.send(`I could not join the voice channel: ${error}`);
+			return msg.channel.send(`I could not join the voice channel: ${error}`).then(msg => {msg.delete(10000).catch()})
 		}
 	} else {
 		const Discord = require('discord.js');
@@ -239,7 +239,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		.setDescription(`✅ **${song.title}** has been added to the queue!`)
 		serverQueue.songs.push(song);
 		if (playlist) return undefined;
-		else return msg.channel.send(AddEmbed);
+		else return msg.channel.send(AddEmbed).then(msg => {msg.delete(10000).catch()})
 	}
 	return undefined;
 }
@@ -265,7 +265,7 @@ const Discord = require('discord.js');
 let startembed = new Discord.RichEmbed()
 .setColor('#FF000')
 .setDescription(`🎶 Start playing: **${song.title}** \n [Song Link](${song.url})`)
-	serverQueue.textChannel.send(startembed);
+	serverQueue.textChannel.send(startembed).then(msg => {msg.delete(10000).catch()})
 }
 
 
