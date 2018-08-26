@@ -95,7 +95,7 @@ msg.channel.send(embed);
 			const Discord = require('discord.js');
 			const addedtoembed = new Discord.RichEmbed()
 			.setColor(`#FF000`)
-				.setDescription(`✅ Playlist: **${playlist.title}** has been added to the queue!`)
+				.setDescription(`<a:success:476629550797684736> Playlist: **${playlist.title}** has been added to the queue!`)
 			return msg.channel.send(addedtoembed).then(msg => {msg.delete(10000).catch()})
 		} else {
 			try {
@@ -124,7 +124,7 @@ msg.channel.send(embed);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send('🆘 I could not obtain any search results.').then(msg => {msg.delete(10000).catch()})
+					return msg.channel.send('<a:XX:482868924573155349> I could not obtain any search results.').then(msg => {msg.delete(10000).catch()})
 				}
 			}
 			return handleVideo(video, msg, voiceChannel);
@@ -143,7 +143,7 @@ msg.channel.send(embed);
 		const Discord = require('discord.js');
 		const leaveembed = new Discord.RichEmbed()
 			.setColor("#FF0000")
-			.setDescription(`❌ Leaving Voice Chat, No More Songs :frowning:`)
+			.setDescription(`<a:XX:482868924573155349> Leaving Voice Chat, No More Songs :frowning:`)
 			.setFooter("Command Ran By: " + msg.author.username, msg.author.avatarURL)
 		msg.channel.send(leaveembed).then(msg => {msg.delete(10000).catch()})
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!').then(msg => {msg.delete(10000).catch()})
@@ -166,7 +166,7 @@ msg.channel.send(embed);
 	} else if (command === 'np') {
 		const Discord = require('discord.js');
 		if (!serverQueue) return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
-		return msg.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`).then(msg => {msg.delete(10000).catch()})
+		return msg.channel.send(`<a:DANCING:483264993618296832> Now playing: **${serverQueue.songs[0].title}**`).then(msg => {msg.delete(10000).catch()})
 	} else if (command === 'queue') {
 		const Discord = require('discord.js');
 		if (!serverQueue) return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
@@ -231,7 +231,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		const Discord = require('discord.js');
 		const AddEmbed = new Discord.RichEmbed()
 		.setColor(`#FF000`)
-		.setDescription(`✅ **${song.title}** has been added to the queue!`)
+		.setDescription(`<a:success:476629550797684736> **${song.title}** has been added to the queue!`)
 		serverQueue.songs.push(song);
 		if (playlist) return undefined;
 		else return msg.channel.send(AddEmbed).then(msg => {msg.delete(10000).catch()})
@@ -259,7 +259,7 @@ function play(guild, song) {
 const Discord = require('discord.js');
 let startembed = new Discord.RichEmbed()
 .setColor('#FF000')
-.setDescription(`🎶 Start playing: **${song.title}** \n [Song Link](${song.url})`)
+.setDescription(`<a:DANCING:483264993618296832> Start playing: **${song.title}** \n [Song Link](${song.url})`)
 	serverQueue.textChannel.send(startembed).then(msg => {msg.delete(10000).catch()})
 }
 
