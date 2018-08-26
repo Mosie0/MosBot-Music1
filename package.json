@@ -2,19 +2,19 @@
     "name": "Musicbot",
 
     "engines": {
-        "node": "~10.6.0"
+        "node": "^10.6.0"
     },
     "scripts": {
-        "start": "nodemon MusicBot.js"
+        "start": "node MusicBot.js"
 
     },
     "dependencies": {
-        "discord.js": "~11.3.2",
+        "discord.js": "^11.3.2",
         "ms": "^2.1.1",
         "ffmpeg-binaries": "^3.2.2-3",
         "ytdl-core": "^0.20.4",
         "simple-youtube-api": "^5.0.2",
-        "nodemon": "~1.17.5",
+        "nodemon": "^1.17.5",
         "opusscript": "^0.0.6"
     }
 }
