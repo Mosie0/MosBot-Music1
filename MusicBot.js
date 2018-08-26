@@ -3,10 +3,6 @@ const { PREFIX } = require('./config');
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-const moment = require('moment');
-require("moment-duration-format");
-
-
 
 const client = new Client({ disableEveryone: true });
 
@@ -40,6 +36,7 @@ client.on('message', async msg => { // eslint-disable-line
 	let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(PREFIX.length);
 	if(command === "ping") {
+		const Discord = require('discord.js')
     const useruser = "Command Ran By: " + msg.author.username;
     const userurl = msg.author.avatarURL;
     let botembed = new Discord.RichEmbed()
@@ -53,7 +50,10 @@ client.on('message', async msg => { // eslint-disable-line
         botembed.setTimestamp()
         msg.edit(botembed)
     })
-	}else if(command === "Stats") {
+	}else if(command === "stats") {
+		const Discord = require('discord.js')
+		const moment = require('moment');
+require("moment-duration-format");
    const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
     let channelsize = client.channels.size;
     let guildsize = client.guilds.size;
