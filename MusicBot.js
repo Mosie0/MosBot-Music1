@@ -19,7 +19,7 @@ client.on('error', console.error);
 
 client.on("ready", async () => {
 	console.log(`${client.user.username} is online on ${client.guilds.size} servers!`);
- 	client.user.setPresence({game: { name: `Music`, type: "LISTENING", url: ""}})
+ 	client.user.setActivity('Music', { type: "LISTENING" })
 });
 
 client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
