@@ -96,7 +96,7 @@ msg.channel.send(embed);
 			const addedtoembed = new Discord.RichEmbed()
 			.setColor(`#FF000`)
 				.setDescription(`✅ Playlist: **${playlist.title}** has been added to the queue!`)
-			return msg.channel.send(addedtoembed).then(msg => {msg.delete(10000).catch()}
+			return msg.channel.send(addedtoembed).then(msg => {msg.delete(10000).catch()})
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
