@@ -1,1 +1,1 @@
-exports.PREFIX = 'm!';
+exports.PREFIX = 'mm!';
