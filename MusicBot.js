@@ -157,7 +157,7 @@ msg.channel.send(embed);
 
 	} else if (command === 'volume') {
 		const Discord = require('discord.js');
-		if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send('You need have Manage Messages for this command')
+		if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(`You need to have Manage Messages or Administrator for this command.`)
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!').then(msg => {msg.delete(10000).catch()})
 		if (!serverQueue) return msg.channel.send('There is nothing playing.').then(msg => {msg.delete(10000).catch()})
 		if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}**`).then(msg => {msg.delete(10000).catch()})
